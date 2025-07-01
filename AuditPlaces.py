@@ -20,7 +20,7 @@ class Event:
         self.ID = record['EventID']
         self.place = record['PlaceID']
 
-def read(filename: str):
+def read_places(filename: str):
     with sqlite3.connect(filename) as db:
         db.row_factory = sqlite3.Row
         cursor = db.cursor()
@@ -34,8 +34,8 @@ def read_events(filename: str):
         result = cursor.execute("SELECT * from EventTable").fetchall()
     return result
 
-file = 'C:/Users/hp/Documents/RootsMagic/deonandsteve10.rmtree'
-data = read(file)
+file = 'C:/Users/hp/Documents/RootsMagic/deonandsteve10b.rmtree'
+data = read_places(file)
 places = [Place(row) for row in data if row['PlaceType'] == 0]
 place_dict = {row['PlaceID']:Place(row) for row in data}
 print(f"found {len(places)} user defined places")
